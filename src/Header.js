@@ -16,7 +16,7 @@ function Header() {
           <div className='T-vault'>T-VAULT</div>
           <div className='navbar'>
             <ul>
-              <li><Link to='' className='safe'>Safe</Link></li>
+              <li><Link to='' className='safe active'>Safe</Link></li>
               <li><Link to='/Vault/Vault'><p>Vault AppRoles</p></Link></li>
               <li><Link to='/Service'>Service Accounts</Link></li>
               <li><Link to='/IAM'>IAM Service Accounts</Link></li>
@@ -24,9 +24,9 @@ function Header() {
             </ul>
           </div>
           <div className='User'>
-            <img src={Docuicon}/>
+            <img src={Docuicon} alt='' />
             <div>Documentation</div>
-            <img src={Conticon}/>
+            <img src={Conticon} alt=''/>
             <div>(Admin) Davis R.</div>
           </div>
         </div>

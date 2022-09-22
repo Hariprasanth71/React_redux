@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import moment from 'moment'
 import Searchicon from './icon_search.png'
 import EmptyCon1 from './Group 12687.png';
 import Create from './LeftContainer/Create';
@@ -6,24 +7,22 @@ import Folder2 from './icon_folder.png';
 import Folder from './RightContainer/Folder';
 import Banner from './Banner_img.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteUser, setcurrentid, remove } from './features/Reducer';
+import { deleteUser, setcurrentid, remove, } from './features/Reducer';
 import MiniFolder from './icon_safes.png';
 import Del from './del.png';
 import EmptyCon2 from './img_secrets.png';
-// import Edit from './LeftContainer/Edit';
-import Edit_tr from './LeftContainer/Edit';
-import Search from './LeftContainer/Search';
+import Edit from './LeftContainer/Edit';
 
 function Container() {
     const dispatch = useDispatch();
     const Allsafelist = useSelector((state) => state.users.value);
     const userList = useSelector((state) => state.users.value);
-    const sear= useSelector((state)=>state.users.value);
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
     const secretbottom = useSelector((state) => state.users.value);
+
     // const [searchTerm, setSearchTerm] = useState("");
-    console.log(secretbottom);
+    // console.log(secretbottom);
     // const handleSearch = event => {
     //     if (event.target.value) {
     //         const searchText = event.target.value;
@@ -45,9 +44,9 @@ function Container() {
                         <span className='count'>({Allsafelist.length})</span>
                     </div>
                     <div className='Search-box'>
-                        <img src={Searchicon}/>
+                        <img src={Searchicon} alt=''/>
                         <input type='text' placeholder='Search' />
-                            {/* {
+                        {/* {
                                 sear
                                   .filter((value) => {
                                     if(searchTerm == ""){
@@ -66,15 +65,23 @@ function Container() {
                                     )
                                   })
                               } */}
-                        
-                        
+
+
                     </div>
                 </div>
                 <div className='left-bottom'>
                     {(userList.length <= 0) && <div className='Emptycon1'>
-                        <img src={EmptyCon1}></img>
+                        
+                        <img src={EmptyCon1} alt=''></img>
+                        <p className='left-text'>Create a Safe and get started!</p>
                     </div>}
-                    <Create />
+                    {
+                        (userList.length <= 0) && <div className='plus-center'><Create /></div>
+                    }
+                    {
+                        (userList.length > 0) && <div className='plus-bottom'><Create /></div>
+                    }
+
                     {
                         userList.map((user) => {
                             return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
@@ -86,29 +93,32 @@ function Container() {
                                     )
                                 }}>
                                 <div className='item-left'>
-                                    <div className='mini_fol'><img src={MiniFolder}></img></div>
-                                    <div>{user.Safe}</div>
+                                    <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
+                                    <div className='dis'>
+                                        <p>{user.Safe}</p>
+                                        <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
+                                        </span>
+                                    </div>
 
                                 </div>
                                 <div className='button-ed' >
-                                    <button type='button' className='edit' ><Edit_tr user={user}/></button>
-                                    <div><button type='button' className='del' onClick={() => { dispatch(deleteUser({ id: user.id })) }}><img src={Del}></img></button></div>
+                                    <button type='button' className='edit' ><Edit user={user} /></button>
+                                    <div><button type='button' className='del' onClick={() => { dispatch(deleteUser({ id: user.id })) }}><img src={Del} alt=''></img></button></div>
                                 </div>
                             </div>
                         })
                     }
-
-                 
                 </div>
             </div>
+
             <div className='Right-container'>
                 <div className='Right-top'>
-                    <img src={Banner} />
+                    <img src={Banner} alt=''/>
                     {safeList.map((value) => {
                         return value.id === currentId.id ? (
                             <div key={value.id} className="right_banner">
-                                <span id="nameInfo">{value.Safe}</span>
-                                <span id="descInfo">{value.Description}</span>
+                                <h1>{value.Safe}</h1>
+                                <span id="Bannername_2">{value.Description}</span>
                             </div>
                         ) : (
                             ""
@@ -117,16 +127,15 @@ function Container() {
 
                     {safeList.length === 0 ? (
                         <div className="right_banner" >
-                            <span id="nameInfo">No Safes Created Yet</span>
-                            <span id="descInfo">
-                                Create a Safe to see your secrets
+                            <h1>No Safes Created Yet</h1>
+                            <span id="Bannername_2">
+                                Create a Safe to see your secrets, folders and permissions here
                             </span>
                         </div>
                     ) : (
                         ""
                     )}
 
-                   
                 </div>
                 <div className='Right-bottom' >
                     <div className='Right-header'>
@@ -134,22 +143,17 @@ function Container() {
                             <div>Secrets</div>
                             <div>Permissions</div>
                         </div>
-                       
-
                         <Folder currentid={currentid.id} />
                     </div>
-                    {/* {currentid.length} */}
-
-                    {/* {secretbottom.map((value, index) => {
+                    
+                    {secretbottom.map((value) => {
                         return (
-                            secretbottom.length !== 0 ||
-                            (value.id === currentid.id && value.secretbox.length > 0 && (
-                                <div key={index}>
-                                    <span >{value.secretbox.length} Secrets</span>
-                                </div>
+                            (value.id === currentid.id && value.secretbox.length>=0 &&(
+                            <span className='secret'>{value.secretbox.length} Secrets</span>
                             ))
                         );
-                    })} */}
+                    })}
+
                     <div>
                         {secretbottom.map((value) => {
                             return value.id === currentid.id ? (
@@ -160,11 +164,10 @@ function Container() {
                                                 <div className="item-left">
                                                     <div className="folderIcon">
                                                         <img className="folder" src={Folder2} alt="" />
-                                                        
                                                     </div>
                                                     <div className="FolderDetails">
                                                         <span>{x}</span>
-                                                        <span id="lastUpdated">Last Updated: a day ago</span>
+                                                        <span id="lastUpdated">Last Updated:{moment().startOf('minute').fromNow()}    </span>
                                                     </div>
                                                 </div>
                                                 <div className="remove" >
@@ -174,8 +177,7 @@ function Container() {
                                                                 id: x,
                                                             })
                                                         )
-                                                    }><img src={Del}></img></button>
-
+                                                    }><img src={Del} alt=''></img></button>
                                                 </div>
                                             </div>
                                         );
@@ -186,12 +188,13 @@ function Container() {
                             );
                         })}
                     </div>
-                    
-                    {(userList1.length <= 0) && <div className='Emptycontainer2'>
-                        <div><img src={EmptyCon2}></img></div>
+
+                    {(userList1.length <= 0) && (<div className='Emptycontainer2'>
+                        <div><img src={EmptyCon2} alt=''></img></div>
                         <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
                         <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
-                    </div>}
+                    </div>)}
+                  
                 </div>
             </div>
         </div>

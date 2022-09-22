@@ -22,7 +22,7 @@ function Edit_tr(props) {
         setType(props.user.Type);
         setDescription(props.user.Description);
     }, []);
- console.log(Safe);
+//  console.log(Safe);
     return (
         <div >
             <Popupfirst trigger={
@@ -48,7 +48,7 @@ function Edit_tr(props) {
                                     <input className='inside-box'
                                         id="safeNameInput"
                                         type='text'
-                                        maxlength = "15" 
+                                        // maxlength = "25"
                                         name="setSafe"
                                         value={Safe}
                                         placeholder='Search'
@@ -59,7 +59,7 @@ function Edit_tr(props) {
                                     <input className='inside-box'
                                         id="ownerInput"
                                         name="Owner"
-                                        maxlength = "15" 
+                                        // maxlength = "15" 
                                         type='text'
                                         value={Owner}
                                         placeholder='Search'
@@ -93,12 +93,12 @@ function Edit_tr(props) {
                                                 Safe: Safe,
                                                 Owner: Owner,
                                                 Type: Type,
-                                                secretbox:secretbox,
+                                                secretbox:secretbox,    
                                                 Description: Description,
                                             }
 
                                         ));
-                                        console.log(Safe);
+                                        console.log(secretbox);
                                         closing();
                                         // setId(props.id);
                                         // setSafe(props.Safe);

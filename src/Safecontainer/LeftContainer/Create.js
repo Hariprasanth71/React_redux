@@ -15,17 +15,19 @@ export default function Create() {
   const [ secretbox,setsecretbox] = useState([]);
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.users.value);
-  const [style, setStyle] = useState('pop-top');
+  // const [style, setStyle] = useState('pop-top');
 
-  const changeStyle = () => {
-    setStyle('pop-toper');
-  };
+  // const changeStyle = () => {
+  //   setStyle('pop-toper');
+  // };
 
   return (
     <div >
       <Popup trigger={
-        <div className={style}>
-          <img src={Createbutt} onClick={changeStyle} />
+        <div >
+          {/* className={style} */}
+          <img src={Createbutt}  />
+          {/* onClick={changeStyle} */}
         </div>} position="top center"
         modal
       >
@@ -46,7 +48,7 @@ export default function Create() {
                   <input className='inside-box'
                     id="safeNameInput"
                     type='text'
-                    maxlength = "13" 
+                    // maxlength = "13" 
                     name="setSafe"
                     value={Safe}
                     placeholder='Search'
@@ -58,9 +60,9 @@ export default function Create() {
                     id="ownerInput"
                     name="Owner"
                     type='text'
-                    maxlength = "12" 
+                    // maxlength = "12" 
                     value={Owner}
-                    placeholder='Search'
+                    placeholder='Owner'
                     onChange={(event) => { setOwner(event.target.value); }}
                   /></div><br></br>
 
@@ -101,10 +103,10 @@ export default function Create() {
                           id: id,
                         })
                       );
-                      setSafe('');
-                      setOwner('');
-                      setType('');
-                      setDescription('');
+                      setSafe(' ');
+                      setOwner(' ');
+                      setType(' ');
+                      setDescription(' ');
                       close();
                     }}
                       disabled={false}>+Create

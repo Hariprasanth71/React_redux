@@ -36,9 +36,9 @@ export default function Folder(props) {
                                     dispatch(addUser2({
                                         currentid: props.currentid,
                                         secretbox: secretbox,
-                                        // id:id,
+                                        
                                     }))
-                                    console.log(secretbox);
+                                    // console.log(secretbox);
                                     close();
                                     setsecretbox(' ');
                                     // close();
