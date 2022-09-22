@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Createbutt from './Group 12577.png';
 import Popup from 'reactjs-popup';
 import { v4 as uuid } from "uuid";
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { addUser, setcurrentid } from '../features/Reducer';
 
 export default function Create() {
@@ -12,9 +12,9 @@ export default function Create() {
   const [Owner, setOwner] = useState('');
   const [Description, setDescription] = useState('');
   const [Type, setType] = useState('');
-  const [ secretbox,setsecretbox] = useState([]);
+  const [ secretbox] = useState([]);
   const dispatch = useDispatch();
-  const userList = useSelector((state) => state.users.value);
+  // const userList = useSelector((state) => state.users.value);
   // const [style, setStyle] = useState('pop-top');
 
   // const changeStyle = () => {
@@ -26,7 +26,7 @@ export default function Create() {
       <Popup trigger={
         <div >
           {/* className={style} */}
-          <img src={Createbutt} />
+          <img src={Createbutt} alt=''/>
           {/* onClick={changeStyle} */}
         </div>} position="top center"
         modal
