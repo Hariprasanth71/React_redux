@@ -26,7 +26,7 @@ export default function Create() {
       <Popup trigger={
         <div >
           {/* className={style} */}
-          <img src={Createbutt}  />
+          <img src={Createbutt} />
           {/* onClick={changeStyle} */}
         </div>} position="top center"
         modal
