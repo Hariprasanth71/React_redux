@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: "users",
   initialState: {
     value: [
-      // secretbox:[" "],
+    
     ], currentid: "",
   },
 
@@ -27,6 +27,7 @@ export const userSlice = createSlice({
 
     deleteUser: (state, action) => {
       state.value = state.value.filter((user) => user.id !== action.payload.id);
+      // state.currentid=state.value[0];
       // state.currentid=state.value[0].id
 
     },
@@ -46,7 +47,7 @@ export const userSlice = createSlice({
           if (value === action.payload.id) {
             secrets.secretbox.splice(index, 1);
           }
-
+          // state.currentid=state.value[0];
         });
       });
     },

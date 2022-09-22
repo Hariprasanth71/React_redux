@@ -85,16 +85,16 @@ function Container() {
                             </div>
                         })
                     }
-                    
+
                 </div>
-                
+
             </div>
 
             <div className='Right-container'>
                 <div className='Right-top'>
                     <img src={Banner} alt='' />
                     {safeList.map((value) => {
-                        return value.id === currentId.id ? (
+                        return value.id === currentid.id ? (
                             <div key={value.id} className="right_banner">
                                 <h1>{value.Safe}</h1>
                                 <div id="Bannername_2">{value.Description}</div>
@@ -167,12 +167,19 @@ function Container() {
                             );
                         })}
                     </div>
-                    {/* <div className='Emptycontainer2'>
-                        <div><img src={EmptyCon2} alt=''></img></div>
-                        <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                        <div><button type='button' className='buttoncreate_fol2'>Add</button></div>
-                    </div> */}
-                    {(userList1.length <= 0) && (<div className='Emptycontainer2'>
+                    {secretbottom.map((value) => {
+                        return (
+                            (value.id === currentid.id && value.secretbox.length === 0 && (
+                                <div className='Emptycontainer2'>
+                                   <div><img src={EmptyCon2} alt=''></img></div>
+                                    <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
+                                    <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
+                                </div>
+                            ))
+                        );
+                    })}
+                 
+                    {(userList1.length === 0) && (<div className='Emptycontainer2'>
                         <div><img src={EmptyCon2} alt=''></img></div>
                         <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
                         <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
