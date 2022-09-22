@@ -43,7 +43,6 @@ export const userSlice = createSlice({
     remove: (state, action) => {
       state.value.forEach((secrets) => {
         secrets.secretbox.forEach((value, index) => {
-
           if (value === action.payload.id) {
             secrets.secretbox.splice(index, 1);
           }

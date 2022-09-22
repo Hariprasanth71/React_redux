@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import Searchicon from './icon_search.png'
 import EmptyCon1 from './Group 12687.png';
@@ -20,18 +20,11 @@ function Container() {
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
     const secretbottom = useSelector((state) => state.users.value);
+    const [Search, SetSearch] = useState("");
 
-    // const [searchTerm, setSearchTerm] = useState("");
-    // console.log(secretbottom);
-    // const handleSearch = event => {
-    //     if (event.target.value) {
-    //         const searchText = event.target.value;
-    //         const matchedJobs = jobs.filter(job => job.jobTitle
-    //         .toLowerCase().includes(searchText.toLowerCase()));
-    //         dispatch(handleSearchJobs(matchedJobs));
-    //     }
-    // }
-    // const [Search, SetSearch] = useState('');
+    const handlesumbit = (event) => {
+        SetSearch(event.target.value);
+    }
     const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
 
@@ -44,34 +37,14 @@ function Container() {
                         <span className='count'>({Allsafelist.length})</span>
                     </div>
                     <div className='Search-box'>
-                        <img src={Searchicon} alt=''/>
-                        <input type='text' placeholder='Search' />
-                        {/* {
-                                sear
-                                  .filter((value) => {
-                                    if(searchTerm == ""){
-                                      return "notfound";
-                                    }else if(value.toLowerCase().includes(searchTerm.toLowerCase())){
-                                      return userList;
-                                    }
-                                  })
-                                  .map((value) => {
-                                    return(
-                                      <div className="template" key={value.id}>
-                                          <img src={val.ima} alt="" />
-                                          <h3>{value.userList}</h3>
-                                          <p className="price">{val.}</p>
-                                      </div> 
-                                    )
-                                  })
-                              } */}
-
+                        <img src={Searchicon} alt='' />
+                        <input type='text' placeholder='Search' value={Search} onChange={handlesumbit} />
 
                     </div>
                 </div>
                 <div className='left-bottom'>
                     {(userList.length <= 0) && <div className='Emptycon1'>
-                        
+
                         <img src={EmptyCon1} alt=''></img>
                         <p className='left-text'>Create a Safe and get started!</p>
                     </div>}
@@ -83,7 +56,11 @@ function Container() {
                     }
 
                     {
-                        userList.map((user) => {
+                        userList.filter((users) => {
+                            if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                                return users
+                            }
+                        }).map((user) => {
                             return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
                                 onClick={() => {
                                     dispatch(
@@ -108,17 +85,19 @@ function Container() {
                             </div>
                         })
                     }
+                    
                 </div>
+                
             </div>
 
             <div className='Right-container'>
                 <div className='Right-top'>
-                    <img src={Banner} alt=''/>
+                    <img src={Banner} alt='' />
                     {safeList.map((value) => {
                         return value.id === currentId.id ? (
                             <div key={value.id} className="right_banner">
                                 <h1>{value.Safe}</h1>
-                                <span id="Bannername_2">{value.Description}</span>
+                                <div id="Bannername_2">{value.Description}</div>
                             </div>
                         ) : (
                             ""
@@ -145,11 +124,11 @@ function Container() {
                         </div>
                         <Folder currentid={currentid.id} />
                     </div>
-                    
+
                     {secretbottom.map((value) => {
                         return (
-                            (value.id === currentid.id && value.secretbox.length>=0 &&(
-                            <span className='secret'>{value.secretbox.length} Secrets</span>
+                            (value.id === currentid.id && value.secretbox.length >= 0 && (
+                                <span className='secret'>{value.secretbox.length} Secrets</span>
                             ))
                         );
                     })}
@@ -188,13 +167,17 @@ function Container() {
                             );
                         })}
                     </div>
-
+                    {/* <div className='Emptycontainer2'>
+                        <div><img src={EmptyCon2} alt=''></img></div>
+                        <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
+                        <div><button type='button' className='buttoncreate_fol2'>Add</button></div>
+                    </div> */}
                     {(userList1.length <= 0) && (<div className='Emptycontainer2'>
                         <div><img src={EmptyCon2} alt=''></img></div>
                         <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
                         <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
                     </div>)}
-                  
+
                 </div>
             </div>
         </div>

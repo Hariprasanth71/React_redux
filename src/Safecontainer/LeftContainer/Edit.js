@@ -27,7 +27,7 @@ function Edit_tr(props) {
         <div >
             <Popupfirst trigger={
                 // <div >
-                <img src={Pen} />
+                <img src={Pen} alt=''/>
             } position="top center"
                 modal
             >
