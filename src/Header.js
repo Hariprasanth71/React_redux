@@ -16,7 +16,7 @@ function Header() {
           <div className='T-vault'>T-VAULT</div>
           <div className='navbar'>
             <ul>
-              <li><Link to='/Safe' className='safe'>Safe</Link></li>
+              <li><Link to='' className='safe'>Safe</Link></li>
               <li><Link to='/Vault/Vault'><p>Vault AppRoles</p></Link></li>
               <li><Link to='/Service'>Service Accounts</Link></li>
               <li><Link to='/IAM'>IAM Service Accounts</Link></li>
@@ -31,7 +31,7 @@ function Header() {
           </div>
         </div>
         <Routes>
-          <Route exact path='/Safe' element={<Container/>}/>
+          <Route exact path='/' element={<Container/>}/>
           <Route path="/Vault/:id" element={<Vault />} />
           <Route path='/Service' element={<Service />} />
           <Route path='/IAM' element={<Iam />} />

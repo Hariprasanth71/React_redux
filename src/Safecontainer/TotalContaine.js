@@ -24,14 +24,14 @@ function Container() {
     const secretbottom = useSelector((state) => state.users.value);
     // const [searchTerm, setSearchTerm] = useState("");
     console.log(secretbottom);
-    const handleSearch = event => {
-        if (event.target.value) {
-            const searchText = event.target.value;
-            const matchedJobs = jobs.filter(job => job.jobTitle
-            .toLowerCase().includes(searchText.toLowerCase()));
-            dispatch(handleSearchJobs(matchedJobs));
-        }
-    }
+    // const handleSearch = event => {
+    //     if (event.target.value) {
+    //         const searchText = event.target.value;
+    //         const matchedJobs = jobs.filter(job => job.jobTitle
+    //         .toLowerCase().includes(searchText.toLowerCase()));
+    //         dispatch(handleSearchJobs(matchedJobs));
+    //     }
+    // }
     // const [Search, SetSearch] = useState('');
     const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
@@ -46,7 +46,7 @@ function Container() {
                     </div>
                     <div className='Search-box'>
                         <img src={Searchicon}/>
-                        <input type='text' placeholder='Search' onChange={handleSearch}/>
+                        <input type='text' placeholder='Search' />
                             {/* {
                                 sear
                                   .filter((value) => {
