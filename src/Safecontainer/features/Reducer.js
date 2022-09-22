@@ -6,6 +6,12 @@ export const userSlice = createSlice({
   
 
   reducers: {
+
+    handleSearchJobs: (state, action) => {
+      state.value = [];
+      state.value.push(action.payload)
+  },
+
     setcurrentid: (state, action) => {
       state.currentid = action.payload;
     },

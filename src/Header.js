@@ -24,9 +24,9 @@ function Header() {
             </ul>
           </div>
           <div className='User'>
-            <img src={Docuicon} />
+            <img src={Docuicon}/>
             <div>Documentation</div>
-            <img src={Conticon} />
+            <img src={Conticon}/>
             <div>(Admin) Davis R.</div>
           </div>
         </div>

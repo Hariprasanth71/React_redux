@@ -12,17 +12,27 @@ import Del from './del.png';
 import EmptyCon2 from './img_secrets.png';
 // import Edit from './LeftContainer/Edit';
 import Edit_tr from './LeftContainer/Edit';
+import Search from './LeftContainer/Search';
 
 function Container() {
     const dispatch = useDispatch();
     const Allsafelist = useSelector((state) => state.users.value);
     const userList = useSelector((state) => state.users.value);
+    const sear= useSelector((state)=>state.users.value);
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
     const secretbottom = useSelector((state) => state.users.value);
-
+    // const [searchTerm, setSearchTerm] = useState("");
     console.log(secretbottom);
-    const [active, setactive] = useState('');
+    const handleSearch = event => {
+        if (event.target.value) {
+            const searchText = event.target.value;
+            const matchedJobs = jobs.filter(job => job.jobTitle
+            .toLowerCase().includes(searchText.toLowerCase()));
+            dispatch(handleSearchJobs(matchedJobs));
+        }
+    }
+    // const [Search, SetSearch] = useState('');
     const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
 
@@ -35,8 +45,29 @@ function Container() {
                         <span className='count'>({Allsafelist.length})</span>
                     </div>
                     <div className='Search-box'>
-                        <img src={Searchicon} />
-                        <input type='text' placeholder='Search' />
+                        <img src={Searchicon}/>
+                        <input type='text' placeholder='Search' onChange={handleSearch}/>
+                            {/* {
+                                sear
+                                  .filter((value) => {
+                                    if(searchTerm == ""){
+                                      return "notfound";
+                                    }else if(value.toLowerCase().includes(searchTerm.toLowerCase())){
+                                      return userList;
+                                    }
+                                  })
+                                  .map((value) => {
+                                    return(
+                                      <div className="template" key={value.id}>
+                                          <img src={val.ima} alt="" />
+                                          <h3>{value.userList}</h3>
+                                          <p className="price">{val.}</p>
+                                      </div> 
+                                    )
+                                  })
+                              } */}
+                        
+                        
                     </div>
                 </div>
                 <div className='left-bottom'>
@@ -60,7 +91,7 @@ function Container() {
 
                                 </div>
                                 <div className='button-ed' >
-                                    <button type='button' className='edit' ><Edit_tr user={user} /></button>
+                                    <button type='button' className='edit' ><Edit_tr user={user}/></button>
                                     <div><button type='button' className='del' onClick={() => { dispatch(deleteUser({ id: user.id })) }}><img src={Del}></img></button></div>
                                 </div>
                             </div>
