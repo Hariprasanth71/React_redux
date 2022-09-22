@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Pen from './pen.png';
 import Popupfirst from 'reactjs-popup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { editSafe } from '../features/Reducer';
 
 function Edit_tr(props) {
@@ -21,7 +21,7 @@ function Edit_tr(props) {
         setOwner(props.user.Owner);
         setType(props.user.Type);
         setDescription(props.user.Description);
-    }, []);
+    }, [props.id,props.Safe,props.Owner,props.Type,props.Description]);
 //  console.log(Safe);
     return (
         <div >

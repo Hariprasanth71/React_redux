@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import Popup from 'reactjs-popup';
 import Folder1 from './folder-plus 1.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { addUser2, setcurrentid } from '../features/Reducer';
+import { addUser2} from '../features/Reducer';
 
 export default function Folder(props) {
     const [secretbox, setsecretbox] = useState([]);
     const dispatch = useDispatch();
-    const userList1 = useSelector((state) => state.users.value);
+    // const userList1 = useSelector((state) => state.users.value);
 
     return (<div className='Ri_header_right'>
         <div>Add Folder</div>
-        <Popup trigger={<img className='Folder' src={Folder1} />} position="top center"
+        <Popup trigger={<img className='Folder' src={Folder1} alt=''/>} position="top center"
             modal>
             {close => (
                 <div className='Folder-popup'>
