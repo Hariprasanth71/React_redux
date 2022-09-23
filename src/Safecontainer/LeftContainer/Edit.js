@@ -21,7 +21,7 @@ function Edit_tr(props) {
         setOwner(props.user.Owner);
         setType(props.user.Type);
         setDescription(props.user.Description);
-    }, [props.id,props.Safe,props.Owner,props.Type,props.Description]);
+    }, [props.user.id,props.user.Safe,props.user.Owner,props.user.Type,props.user.Description,props.user.setsecretbox]);
 //  console.log(Safe);
     return (
         <div >

@@ -12,6 +12,7 @@ import MiniFolder from './icon_safes.png';
 import Del from './del.png';
 import EmptyCon2 from './img_secrets.png';
 import Edit from './LeftContainer/Edit';
+import FolderCenter from './RightContainer/FolderCenter';
 
 function Container() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Container() {
     const handlesumbit = (event) => {
         SetSearch(event.target.value);
     }
-    const currentId = useSelector((state) => state.users.currentid);
+    // const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
 
     return (
@@ -173,7 +174,7 @@ function Container() {
                                 <div className='Emptycontainer2'>
                                    <div><img src={EmptyCon2} alt=''></img></div>
                                     <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                                    <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
+                                    <div><FolderCenter currentid={currentid.id}/></div>
                                 </div>
                             ))
                         );
@@ -182,7 +183,7 @@ function Container() {
                     {(userList1.length === 0) && (<div className='Emptycontainer2'>
                         <div><img src={EmptyCon2} alt=''></img></div>
                         <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                        <div><button type='button' className='buttoncreate_fol2' >+Add</button></div>
+                        <div><FolderCenter currentid={currentid.id}/></div>
                     </div>)}
 
                 </div>
