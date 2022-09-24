@@ -11,7 +11,7 @@ function Edit_tr(props) {
     const [Description, setDescription] = useState(" ");
     const [Type, setType] = useState("");
     const dispatch = useDispatch();
-    const [secretbox,setsecretbox]=useState();
+    const [secretbox,setsecretbox]=useState(    );
     // const userList = useSelector((state) => state.users.value);
 
     useEffect(() => {

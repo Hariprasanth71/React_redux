@@ -16,15 +16,20 @@ import FolderCenter from './RightContainer/FolderCenter';
 
 function Container() {
     const dispatch = useDispatch();
+    const val = "vo data found"
     const Allsafelist = useSelector((state) => state.users.value);
     const userList = useSelector((state) => state.users.value);
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
+    // const currentId = useSelector((state) => state.users.currentid);
     const secretbottom = useSelector((state) => state.users.value);
     const [Search, SetSearch] = useState("");
 
     const handlesumbit = (event) => {
         SetSearch(event.target.value);
+    }
+    function stop(e) {
+        e.stopPropagation();
     }
     // const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
@@ -61,29 +66,44 @@ function Container() {
                             if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                 return users
                             }
-                        }).map((user) => {
-                            return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
-                                onClick={() => {
-                                    dispatch(
-                                        setcurrentid({
-                                            id: user.id,
-                                        })
-                                    )
-                                }}>
-                                <div className='item-left'>
-                                    <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
-                                    <div className='dis'>
-                                        <p>{user.Safe}</p>
-                                        <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
-                                        </span>
-                                    </div>
+                       
+                            // else if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                            //     return users
+                            // }
 
+
+                        }).map((user) => {
+                            // if (!value.includes(user)) {
+                                return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
+                                    onClick={() => {
+                                        dispatch(
+                                            setcurrentid({
+                                                id: user.id,
+                                            })
+                                        )
+                                    }}>
+                                    <div className='item-left'>
+                                        <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
+                                        <div className='dis'>
+                                         {/* if(!value.includes(user)) { */}
+                                            <p>{user.Safe}</p>
+                                            <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div className='button-ed' >
+                                        <button type='button' className='edit' ><Edit user={user} /></button>
+                                        <div><button type='button' className='del' onClick={(e) => {
+                                            stop(e);
+                                            dispatch
+                                                (deleteUser(
+                                                    { id: user.id }
+                                                ))
+                                        }}><img src={Del} alt=''></img></button></div>
+                                    </div>
                                 </div>
-                                <div className='button-ed' >
-                                    <button type='button' className='edit' ><Edit user={user} /></button>
-                                    <div><button type='button' className='del' onClick={() => { dispatch(deleteUser({ id: user.id })) }}><img src={Del} alt=''></img></button></div>
-                                </div>
-                            </div>
+                            // }
                         })
                     }
 
@@ -121,71 +141,72 @@ function Container() {
                     <div className='Right-header'>
                         <div className='Ri_header_left'>
                             <div>Secrets</div>
-                            <div>Permissions</div>
+                            {/* <div>Permissions</div> */}
                         </div>
                         <Folder currentid={currentid.id} />
                     </div>
-
-                    {secretbottom.map((value) => {
-                        return (
-                            (value.id === currentid.id && value.secretbox.length >= 0 && (
-                                <span className='secret'>{value.secretbox.length} Secrets</span>
-                            ))
-                        );
-                    })}
-
-                    <div>
+                    <div className='Bottom_folder'>
                         {secretbottom.map((value) => {
-                            return value.id === currentid.id ? (
-                                <div key={value.id}>
-                                    {value.secretbox.map((x, index) => {
-                                        return (
-                                            <div key={index} className="display-item_fol">
-                                                <div className="item-left">
-                                                    <div className="folderIcon">
-                                                        <img className="folder" src={Folder2} alt="" />
-                                                    </div>
-                                                    <div className="FolderDetails">
-                                                        <span>{x}</span>
-                                                        <span id="lastUpdated">Last Updated:{moment().startOf('minute').fromNow()}    </span>
-                                                    </div>
-                                                </div>
-                                                <div className="remove" >
-                                                    <button type='button' className='del' onClick={() =>
-                                                        dispatch(
-                                                            remove({
-                                                                id: x,
-                                                            })
-                                                        )
-                                                    }><img src={Del} alt=''></img></button>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            ) : (
-                                ""
+                            return (
+                                (value.id === currentid.id && value.secretbox.length >= 0 && (
+                                    <span className='secret'>{value.secretbox.length} Secrets</span>
+                                ))
                             );
                         })}
-                    </div>
-                    {secretbottom.map((value) => {
-                        return (
-                            (value.id === currentid.id && value.secretbox.length === 0 && (
-                                <div className='Emptycontainer2'>
-                                   <div><img src={EmptyCon2} alt=''></img></div>
-                                    <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                                    <div><FolderCenter currentid={currentid.id}/></div>
-                                </div>
-                            ))
-                        );
-                    })}
-                 
-                    {(userList1.length === 0) && (<div className='Emptycontainer2'>
-                        <div><img src={EmptyCon2} alt=''></img></div>
-                        <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                        <div><FolderCenter currentid={currentid.id}/></div>
-                    </div>)}
 
+                        <div>
+                            {secretbottom.map((value) => {
+                                return value.id === currentid.id ? (
+                                    <div key={value.id}>
+                                        {value.secretbox.map((x, index) => {
+                                            return (
+                                                <div key={index} className="display-item_fol">
+                                                    <div className="item-left">
+                                                        <div className="folderIcon">
+                                                            <img className="folder" src={Folder2} alt="" />
+                                                        </div>
+                                                        <div className="FolderDetails">
+                                                            <span>{x}</span>
+                                                            <span id="lastUpdated">Last Updated:{moment().startOf('minute').fromNow()}    </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="remove" >
+                                                        <button type='button' className='del' onClick={() =>
+                                                            dispatch(
+                                                                remove({
+                                                                    id: x,
+                                                                })
+                                                            )
+                                                        }><img src={Del} alt=''></img></button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                ) : (
+                                    ""
+                                );
+                            })}
+                        </div>
+                        {secretbottom.map((value) => {
+                            return (
+                                (value.id === currentid.id && value.secretbox.length === 0 && (
+                                    <div className='Emptycontainer2'>
+                                        <div><img src={EmptyCon2} alt=''></img></div>
+                                        <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
+                                        <div><FolderCenter currentid={currentid.id} /></div>
+                                    </div>
+                                ))
+                            );
+                        })}
+
+                        {(userList1.length === 0) && (<div className='Emptycontainer2'>
+                            <div><img src={EmptyCon2} alt=''></img></div>
+                            <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
+                            <div><FolderCenter currentid={currentid.id} /></div>
+                        </div>)}
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ export default function FolderCenter(props) {
 
     return (<div className='Ri_header_right'>
         {/* <div>Add Folder</div> */}
-        <Popup trigger={<button type='button' className='buttoncreate_fol2' >+Add</button>} position="top center"
+        <Popup trigger={<button type='button' className='buttoncreate_fol2'>+Add</button>} position="top center"
             modal>
             {close => (
                 <div className='Folder-popup'>
@@ -20,7 +20,7 @@ export default function FolderCenter(props) {
                     </div>
                     <div className='Folder-sub2'>
                         <div>Folder Name</div>
-                        <div><input type='text' placeholder='Folder Name' maxlength="15" className='inside-box_ri' onChange={(event) => {
+                        <div><input type='text' placeholder='Folder Name' maxlength="10"  className='inside-box_ri' onChange={(event) => {
                             setsecretbox(event.target.value);
                             event.preventDefault()
                         }}

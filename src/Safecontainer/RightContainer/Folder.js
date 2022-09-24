@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import Popup from 'reactjs-popup';
 import Folder1 from './folder-plus 1.png';
-import {  useDispatch } from 'react-redux';
-import { addUser2} from '../features/Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser2 } from '../features/Reducer';
 
 export default function Folder(props) {
     const [secretbox, setsecretbox] = useState([]);
     const dispatch = useDispatch();
     // const userList1 = useSelector((state) => state.users.value);
+    // const secretbottom = useSelector((state) => state.users.value);
 
-    return (<div className='Ri_header_right'>
-        <div>Add Folder</div>
-        <Popup trigger={<img className='Folder' src={Folder1} alt=''/>} position="top center"
+    return (<div>
+
+        <Popup trigger={<div className='Ri_header_right'><div>Add Folder</div> <div><img className='Folder' src={Folder1} alt='' /></div></div>
+        } position="top center"
             modal>
             {close => (
                 <div className='Folder-popup'>
@@ -31,18 +33,32 @@ export default function Folder(props) {
                     <div className='Folder-sub3'>
                         <button type='sumbit' className='buttoncancel_fol' onClick={() => { close(); }}>Cancel</button>
                         {
-                            <button type='submit' className='buttoncreate_fol'
+                            (secretbox.length >= 4) && <button type='submit' className='buttoncreate_fol'
                                 onClick={() => {
                                     dispatch(addUser2({
                                         currentid: props.currentid,
                                         secretbox: secretbox,
-                                        
+
                                     }))
                                     // console.log(secretbox);
                                     close();
-                                    setsecretbox(' ');
+                                    setsecretbox('');
                                     // close();
-                                }} >Save</button>
+                                }} disabled={false}>Save</button>
+                        }
+                        {
+                            (secretbox.length <= 3) && <button type='submit' className='buttoncreate_fol_disable'
+                                onClick={() => {
+                                    dispatch(addUser2({
+                                        currentid: props.currentid,
+                                        secretbox: secretbox,
+
+                                    }))
+                                    // console.log(secretbox);
+                                    close();
+                                    setsecretbox('');
+                                    // close();
+                                }} disabled={true}>Save</button>
                         }
                     </div>
                 </div>

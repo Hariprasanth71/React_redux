@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: "users",
   initialState: {
     value: [
-    
+
     ], currentid: "",
   },
 
@@ -21,14 +21,31 @@ export const userSlice = createSlice({
     },
 
     addUser: (state, action) => {
-      state.value.push(action.payload);
-      console.log(action.payload);
+      // if ()
+      // {
+        // Array.from(new Set(value.push(action.payload)))
+        // const filteredArr = Array.from(new Set(value));
+        state.value.push(action.payload);
+        // console.log(action.payload);
+      // }
+
+
+
     },
+
+    // deleteUser: (state, action) => {
+    //   state.value.forEach((users, index) => {
+    //     if (users.id === action.payload.id) {
+    //       state.value.splice(index, 1);
+    //     }
+    //   });
+
+    // },
 
     deleteUser: (state, action) => {
       state.value = state.value.filter((user) => user.id !== action.payload.id);
-      // state.currentid=state.value[0];
-      // state.currentid=state.value[0].id
+      // state.currentid = state.value.length>0 ? state.value[0] : "";
+      state.currentid = state.value.length > 0 ? state.value[state.value.length - 1] : "";
 
     },
 
@@ -38,6 +55,7 @@ export const userSlice = createSlice({
         if (users.id === action.payload.id) {
           state.value.splice(index, 1, action.payload);
         }
+
       });
     },
 
@@ -47,8 +65,9 @@ export const userSlice = createSlice({
           if (value === action.payload.id) {
             secrets.secretbox.splice(index, 1);
           }
-          // state.currentid=state.value[0];
+
         });
+
       });
     },
 
@@ -63,7 +82,7 @@ export const userSlice = createSlice({
 
   },
 });
-  
+
 
 export const { addUser, deleteUser, addUser2, editSafe, setcurrentid, remove } = userSlice.actions;
 export default userSlice.reducer;
