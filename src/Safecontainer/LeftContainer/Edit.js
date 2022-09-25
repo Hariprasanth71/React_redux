@@ -49,7 +49,7 @@ function Edit_tr(props) {
                                     <input className='inside-box'
                                         id="safeNameInput"
                                         type='text'
-                                        // maxlength = "25"
+                                        maxlength = "35"
                                         name="setSafe"
                                         value={Safe}
                                         placeholder='Search'
@@ -60,7 +60,7 @@ function Edit_tr(props) {
                                     <input className='inside-box'
                                         id="ownerInput"
                                         name="Owner"
-                                        // maxlength = "15" 
+                                        maxlength = "35" 
                                         type='text'
                                         value={Owner}
                                         placeholder='Search'
