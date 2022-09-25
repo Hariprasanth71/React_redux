@@ -39,7 +39,7 @@ export default function FolderCenter(props) {
                     <div className='Folder-sub3'>
                         <button type='sumbit' className='buttoncancel_fol' onClick={() => { close(); }}>Cancel</button>
                         {
-                            <button type='submit' className='buttoncreate_fol'
+                           (secretbox.length>=4) && <button type='submit' className='buttoncreate_fol'
                                 onClick={() => {
                                     dispatch(addUser2({
                                         currentid: props.currentid,
@@ -48,10 +48,25 @@ export default function FolderCenter(props) {
                                     }))
                                     // console.log(secretbox);
                                     close();
-                                    setsecretbox(' ');
+                                    setsecretbox('');
                                     setMessage('');
                                     // close();
-                                }} >Save</button>
+                                }} disabled={false}>Save</button>
+                        }
+                        {
+                           (secretbox.length<=3) && <button type='submit' className='buttoncreate_fol_disable'
+                                onClick={() => {
+                                    dispatch(addUser2({
+                                        currentid: props.currentid,
+                                        secretbox: secretbox,
+                                        message:message,
+                                    }))
+                                    // console.log(secretbox);
+                                    close();
+                                    setsecretbox('');
+                                    setMessage('');
+                                    // close();
+                                }} disabled={true}>Save</button>
                         }
                     </div>
                 </div>

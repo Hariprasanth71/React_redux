@@ -43,7 +43,7 @@ export default function Create() {
                   <input className='inside-box'
                     id="safeNameInput"
                     type='text'
-                    maxlength="13"
+                    maxlength="15"
                     name="setSafe"
                     value={Safe}
                     placeholder='Search'
@@ -56,7 +56,7 @@ export default function Create() {
                     id="ownerInput"
                     name="Owner"
                     type='text'
-                    maxlength="12"
+                    maxlength="15"
                     value={Owner}
 
                     placeholder='Owner'
@@ -75,6 +75,7 @@ export default function Create() {
                     rows="2" className='inside-box_descrip'
                     id="descInput"
                     name="Description"
+                    maxLength="65"
                     value={Description}
 
                     onChange={(event) => { setDescription(event.target.value); }} />

@@ -24,7 +24,7 @@ function Container() {
     const [Search, SetSearch] = useState('');
 
     const handlesumbit = (event) => {
-        
+
         SetSearch(event.target.value);
     }
     function stop(e) {
@@ -41,10 +41,10 @@ function Container() {
                 <div className='left-top'>
                     <div className='all'>
                         <div>All Safe</div>
-                       
+
                         <span className='count'>({
                             userList.filter((users) => {
-                                if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                                if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                     return users
                                 }
                             }).length
@@ -56,7 +56,7 @@ function Container() {
 
                     </div>
                 </div>
-               {/* {(Search!==lew)&& <p>sdffdfsdf</p>} */}
+
                 <div className='left-bottom'>
                     {(userList.length <= 0) && <div className='Emptycon1'>
 
@@ -70,19 +70,21 @@ function Container() {
                     {
                         (userList.length > 0) && <div className='plus-bottom'><Create /></div>
                     }
-                        {
-                            userList.filter((users) => {
-                                if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
-                                    return users
-                                }
-                            }).length===0 && userList.length>0 && <p>No data found</p>
-                        }
+                    
                     {
                         userList.filter((users) => {
-                            if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                            if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                 return users
                             }
-                            
+                        }).length === 0 && userList.length > 0 && <div className='No_data'>No Safe Found!</div>
+                    }
+
+                    {
+                        userList.filter((users) => {
+                            if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                                return users
+                            }
+
                         }).map((user) => {
                             return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
                                 onClick={() => {
@@ -96,7 +98,6 @@ function Container() {
                                     <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
                                     <div className='dis'>
                                         <p>{user.Safe}</p>
-
                                         <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
                                         </span>
                                     </div>
@@ -104,7 +105,7 @@ function Container() {
                                 </div>
                                 <div className='button-ed' >
                                     <button type='button' className='edit' ><Edit user={user} /></button>
-                                    <div><button type='button' className='del' onClick={(e) => {
+                                    <div className='pen'><button type='button' className='del' onClick={(e) => {
                                         stop(e);
                                         dispatch
                                             (deleteUser(
@@ -112,12 +113,9 @@ function Container() {
                                             ))
                                     }}><img src={Del} alt=''></img></button></div>
                                 </div>
-
                             </div>
-
                         })
                     }
-
                 </div>
 
             </div>
@@ -186,7 +184,7 @@ function Container() {
                                                             <span id="lastUpdated">Last Updated:{moment().startOf('minute').fromNow()}    </span>
                                                         </div>
                                                     </div>
-                                                    <div className="remove" >
+                                                    <div className="pen" >
                                                         <button type='button' className='del' onClick={() =>
                                                             dispatch(
                                                                 remove({
