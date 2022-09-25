@@ -4,6 +4,7 @@ import Searchicon from './icon_search.png'
 import EmptyCon1 from './Group 12687.png';
 import Create from './LeftContainer/Create';
 import Folder2 from './icon_folder.png';
+import Grey from './Grey Folder.png';
 import Folder from './RightContainer/Folder';
 import Banner from './Banner_img.png';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,24 +14,27 @@ import Del from './del.png';
 import EmptyCon2 from './img_secrets.png';
 import Edit from './LeftContainer/Edit';
 import FolderCenter from './RightContainer/FolderCenter';
+// import { render } from '@testing-library/react';
 
 function Container() {
     const dispatch = useDispatch();
-    const val = "vo data found"
     const Allsafelist = useSelector((state) => state.users.value);
     const userList = useSelector((state) => state.users.value);
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
-    // const currentId = useSelector((state) => state.users.currentid);
+    // const [disp, setdisp] = useState(false);
     const secretbottom = useSelector((state) => state.users.value);
-    const [Search, SetSearch] = useState("");
+    const [Search, SetSearch] = useState('');
 
     const handlesumbit = (event) => {
+        
         SetSearch(event.target.value);
     }
     function stop(e) {
         e.stopPropagation();
     }
+
+
     // const currentId = useSelector((state) => state.users.currentid);
     const safeList = useSelector((state) => state.users.value);
 
@@ -40,7 +44,14 @@ function Container() {
                 <div className='left-top'>
                     <div className='all'>
                         <div>All Safe</div>
-                        <span className='count'>({Allsafelist.length})</span>
+                       
+                        <span className='count'>({
+                            userList.filter((users) => {
+                                if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                                    return users
+                                }
+                            }).length
+                        })</span>
                     </div>
                     <div className='Search-box'>
                         <img src={Searchicon} alt='' />
@@ -48,6 +59,7 @@ function Container() {
 
                     </div>
                 </div>
+               {/* {(Search!==lew)&& <p>sdffdfsdf</p>} */}
                 <div className='left-bottom'>
                     {(userList.length <= 0) && <div className='Emptycon1'>
 
@@ -57,53 +69,56 @@ function Container() {
                     {
                         (userList.length <= 0) && <div className='plus-center'><Create /></div>
                     }
+
                     {
                         (userList.length > 0) && <div className='plus-bottom'><Create /></div>
                     }
-
+                        {
+                            userList.filter((users) => {
+                                if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                                    return users
+                                }
+                            }).length===0 && userList.length>0 && <p>No data found</p>
+                        }
                     {
                         userList.filter((users) => {
-                            if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
+                            if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                 return users
                             }
-                       
-                            // else if(users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
-                            //     return users
-                            // }
-
-
+                            
                         }).map((user) => {
-                            // if (!value.includes(user)) {
-                                return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
-                                    onClick={() => {
-                                        dispatch(
-                                            setcurrentid({
-                                                id: user.id,
-                                            })
-                                        )
-                                    }}>
-                                    <div className='item-left'>
-                                        <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
-                                        <div className='dis'>
-                                         {/* if(!value.includes(user)) { */}
-                                            <p>{user.Safe}</p>
-                                            <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
-                                            </span>
-                                        </div>
+                            return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
+                                onClick={() => {
+                                    dispatch(
+                                        setcurrentid({
+                                            id: user.id,
+                                        })
+                                    )
+                                }}>
+                                <div className='item-left'>
+                                    <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
+                                    <div className='dis'>
+                                        {/* if(!value.includes(user)) { */}
+                                        <p>{user.Safe}</p>
 
+                                        <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
+                                        </span>
                                     </div>
-                                    <div className='button-ed' >
-                                        <button type='button' className='edit' ><Edit user={user} /></button>
-                                        <div><button type='button' className='del' onClick={(e) => {
-                                            stop(e);
-                                            dispatch
-                                                (deleteUser(
-                                                    { id: user.id }
-                                                ))
-                                        }}><img src={Del} alt=''></img></button></div>
-                                    </div>
+
                                 </div>
-                            // }
+                                <div className='button-ed' >
+                                    <button type='button' className='edit' ><Edit user={user} /></button>
+                                    <div><button type='button' className='del' onClick={(e) => {
+                                        stop(e);
+                                        dispatch
+                                            (deleteUser(
+                                                { id: user.id }
+                                            ))
+                                    }}><img src={Del} alt=''></img></button></div>
+                                </div>
+
+                            </div>
+
                         })
                     }
 
@@ -143,7 +158,12 @@ function Container() {
                             <div>Secrets</div>
                             {/* <div>Permissions</div> */}
                         </div>
-                        <Folder currentid={currentid.id} />
+                        {
+                            (userList.length > 0) && <Folder currentid={currentid.id} />
+                        }
+                        {
+                            (userList.length === 0) && <div className='Grey-Folder'><p>Add Folder</p><div><img src={Grey}></img></div></div>
+                        }
                     </div>
                     <div className='Bottom_folder'>
                         {secretbottom.map((value) => {
@@ -200,10 +220,13 @@ function Container() {
                             );
                         })}
 
+
                         {(userList1.length === 0) && (<div className='Emptycontainer2'>
                             <div><img src={EmptyCon2} alt=''></img></div>
                             <p>Add a Folder and then you’ll be able to add Secrets to view them all here</p>
-                            <div><FolderCenter currentid={currentid.id} /></div>
+                            {/* <div><FolderCenter currentid={currentid.id} /></div> */}
+
+                            <button type='button' className='Grey-Add'>+Add</button>
                         </div>)}
 
                     </div>

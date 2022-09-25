@@ -6,7 +6,14 @@ import { addUser2 } from '../features/Reducer';
 
 export default function Folder(props) {
     const [secretbox, setsecretbox] = useState([]);
+    const [message, setMessage] = useState('');
     const dispatch = useDispatch();
+    const handleChange = event => {
+        // const result = event.target.value.replace(/[^a-z0-9_]/gi, '');
+          const result = event.target.value.replace(/[\W]/gi, '');
+
+        setMessage(result);
+    };
     // const userList1 = useSelector((state) => state.users.value);
     // const secretbottom = useSelector((state) => state.users.value);
 
@@ -22,13 +29,15 @@ export default function Folder(props) {
                     </div>
                     <div className='Folder-sub2'>
                         <div>Folder Name</div>
-                        <div><input type='text' placeholder='Folder Name' maxlength="15" className='inside-box_ri' onChange={(event) => {
+                        <div><input type='text' placeholder='Folder Name' maxlength="15" value={message} className='inside-box_ri' onChange={(event) => {
+                            handleChange(event);
                             setsecretbox(event.target.value);
+
                             event.preventDefault()
                         }}
                         ></input></div>
 
-                        <div><p>Please enter lowercase alphabets, numbers and underscores only.</p></div>
+                        <div><p>Please enter alphabets, numbers and underscores only.</p></div>
                     </div>
                     <div className='Folder-sub3'>
                         <button type='sumbit' className='buttoncancel_fol' onClick={() => { close(); }}>Cancel</button>
@@ -38,11 +47,13 @@ export default function Folder(props) {
                                     dispatch(addUser2({
                                         currentid: props.currentid,
                                         secretbox: secretbox,
-
+                                        message:message,
+                                        
                                     }))
                                     // console.log(secretbox);
                                     close();
                                     setsecretbox('');
+                                    setMessage('');
                                     // close();
                                 }} disabled={false}>Save</button>
                         }
@@ -52,11 +63,12 @@ export default function Folder(props) {
                                     dispatch(addUser2({
                                         currentid: props.currentid,
                                         secretbox: secretbox,
-
+                                        message:message,
                                     }))
                                     // console.log(secretbox);
                                     close();
-                                    setsecretbox('');
+                                    setsecretbox(' ');
+                                    setMessage('');
                                     // close();
                                 }} disabled={true}>Save</button>
                         }

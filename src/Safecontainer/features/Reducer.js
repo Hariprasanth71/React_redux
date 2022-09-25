@@ -21,27 +21,10 @@ export const userSlice = createSlice({
     },
 
     addUser: (state, action) => {
-      // if ()
-      // {
-        // Array.from(new Set(value.push(action.payload)))
-        // const filteredArr = Array.from(new Set(value));
+      
         state.value.push(action.payload);
-        // console.log(action.payload);
-      // }
-
-
-
     },
-
-    // deleteUser: (state, action) => {
-    //   state.value.forEach((users, index) => {
-    //     if (users.id === action.payload.id) {
-    //       state.value.splice(index, 1);
-    //     }
-    //   });
-
-    // },
-
+  
     deleteUser: (state, action) => {
       state.value = state.value.filter((user) => user.id !== action.payload.id);
       // state.currentid = state.value.length>0 ? state.value[0] : "";
