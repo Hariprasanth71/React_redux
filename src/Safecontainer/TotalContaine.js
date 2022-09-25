@@ -95,7 +95,6 @@ function Container() {
                                 <div className='item-left'>
                                     <div className='mini_fol'><img src={MiniFolder} alt=''></img></div>
                                     <div className='dis'>
-                                        {/* if(!value.includes(user)) { */}
                                         <p>{user.Safe}</p>
 
                                         <span id="lastUpdated">Last Updated: {moment().startOf('minute').fromNow()}
