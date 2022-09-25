@@ -14,15 +14,12 @@ import Del from './del.png';
 import EmptyCon2 from './img_secrets.png';
 import Edit from './LeftContainer/Edit';
 import FolderCenter from './RightContainer/FolderCenter';
-// import { render } from '@testing-library/react';
 
 function Container() {
     const dispatch = useDispatch();
-    const Allsafelist = useSelector((state) => state.users.value);
     const userList = useSelector((state) => state.users.value);
     const userList1 = useSelector((state) => state.users.value);
     const currentid = useSelector((state) => state.users.currentid);
-    // const [disp, setdisp] = useState(false);
     const secretbottom = useSelector((state) => state.users.value);
     const [Search, SetSearch] = useState('');
 
