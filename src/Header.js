@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import Vault from './Components/Vault';
 import Service from './Components/Service';
 import Azure from './Components/Azure';
+import Tval from './image.png'
 import Iam from './Components/iam';
 import Docuicon from './document-128.png';
 import Conticon from './contacts-128.png';
@@ -16,11 +17,12 @@ function Header() {
           <div className='T-vault'>T-VAULT</div>
           <div className='navbar'>
             <ul>
-              <li><NavLink to='' className='safe active'>Safe</NavLink></li>
-              <li><NavLink to='/Vault/Vault'><p>Vault AppRoles</p></NavLink></li>
-              <li><NavLink to='/Service'>Service Accounts</NavLink></li>
-              <li><NavLink to='/IAM'>IAM Service Accounts</NavLink></li>
-              <li><NavLink to='/Azure'>Azure Active Directory</NavLink></li>
+            {/* className='safe active' */}
+              <li><NavLink to='/Safes' className='safe' activeClassName="active">Safes</NavLink></li>
+              <li><NavLink to='/Vault/Vault' activeClassName="active"><p>Vault AppRoles</p></NavLink></li>
+              <li><NavLink to='/Service' activeClassName="active">Service Accounts</NavLink></li>
+              <li><NavLink to='/IAM' activeClassName="active">IAM Service Accounts</NavLink></li>
+              <li><NavLink to='/Azure' activeClassName="active">Azure Active Directory</NavLink></li>
             </ul>
           </div>
           <div className='User'>
@@ -31,7 +33,7 @@ function Header() {
           </div>
         </div>
         <Routes>
-          <Route exact path='/' element={<Container/>}/>
+          <Route exact path='/Safes' element={<Container/>}/>
           <Route path="/Vault/:id" element={<Vault />} />
           <Route path='/Service' element={<Service />} />
           <Route path='/IAM' element={<Iam />} />
