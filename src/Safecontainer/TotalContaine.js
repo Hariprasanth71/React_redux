@@ -47,6 +47,7 @@ function Container() {
                                 if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                     return users
                                 }
+                                return null
                             }).length
                         })</span>
                     </div>
@@ -76,6 +77,7 @@ function Container() {
                             if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                 return users
                             }
+                            return null
                         }).length === 0 && userList.length > 0 && <div className='No_data'>No Safe Found!</div>
                     }
 
@@ -84,7 +86,7 @@ function Container() {
                             if (users.Safe.toLocaleLowerCase().includes(Search.toLowerCase())) {
                                 return users
                             }
-
+                            return null
                         }).map((user) => {
                             return <div className={user.id === currentid.id ? "display-item" : "Noactive_item"} key={user.id}
                                 onClick={() => {
@@ -156,7 +158,7 @@ function Container() {
                             (userList.length > 0) && <Folder currentid={currentid.id} />
                         }
                         {
-                            (userList.length === 0) && <div className='Grey-Folder'><p>Add Folder</p><div><img src={Grey}></img></div></div>
+                            (userList.length === 0) && <div className='Grey-Folder'><p>Add Folder</p><div><img src={Grey} alt=''></img></div></div>
                         }
                     </div>
                     <div className='Bottom_folder'>

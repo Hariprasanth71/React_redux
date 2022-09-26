@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import Vault from './Components/Vault';
 import Service from './Components/Service';
 import Azure from './Components/Azure';
-import Tval from './image.png'
+// import Tval from './image.png'
 import Iam from './Components/iam';
 import Docuicon from './document-128.png';
 import Conticon from './contacts-128.png';

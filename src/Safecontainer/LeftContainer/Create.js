@@ -19,12 +19,12 @@ export default function Create() {
   const userList = useSelector((state) => state.users.value);
 
   useEffect(() => {
-    function safeExists(n) {
+    function Exists(n) {
       return userList.some(function (el) {
         return el.Safe === n;
       });
     }
-    setsafeexist(safeExists(Safe));
+    setsafeexist(Exists(Safe));
   }, [Safe, userList]);
 
   return (

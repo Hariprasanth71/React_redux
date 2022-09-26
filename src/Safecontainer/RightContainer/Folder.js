@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Popup from 'reactjs-popup';
 import Folder1 from './folder-plus 1.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { addUser2 } from '../features/Reducer';
 
 export default function Folder(props) {
