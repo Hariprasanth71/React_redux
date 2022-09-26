@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import Vault from './Components/Vault';
 import Service from './Components/Service';
 import Azure from './Components/Azure';
@@ -16,11 +16,11 @@ function Header() {
           <div className='T-vault'>T-VAULT</div>
           <div className='navbar'>
             <ul>
-              <li><Link to='' className='safe active'>Safe</Link></li>
-              <li><Link to='/Vault/Vault'><p>Vault AppRoles</p></Link></li>
-              <li><Link to='/Service'>Service Accounts</Link></li>
-              <li><Link to='/IAM'>IAM Service Accounts</Link></li>
-              <li><Link to='/Azure'>Azure Active Directory</Link></li>
+              <li><NavLink to='' className='safe active'>Safe</NavLink></li>
+              <li><NavLink to='/Vault/Vault'><p>Vault AppRoles</p></NavLink></li>
+              <li><NavLink to='/Service'>Service Accounts</NavLink></li>
+              <li><NavLink to='/IAM'>IAM Service Accounts</NavLink></li>
+              <li><NavLink to='/Azure'>Azure Active Directory</NavLink></li>
             </ul>
           </div>
           <div className='User'>

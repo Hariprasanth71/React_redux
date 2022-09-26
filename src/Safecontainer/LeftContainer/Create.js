@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Createbutt from './Group 12577.png';
 import Popup from 'reactjs-popup';
 import { v4 as uuid } from "uuid";
@@ -15,7 +15,18 @@ export default function Create() {
   const [Type, setType] = useState('');
   const [secretbox] = useState([]);
   const dispatch = useDispatch();
+  const [safeexist, setsafeexist] = useState(true);
   const userList = useSelector((state) => state.users.value);
+
+  useEffect(() => {
+    function safeExists(n) {
+      return userList.some(function (el) {
+        return el.Safe === n;
+      });
+    }
+    setsafeexist(safeExists(Safe));
+  }, [Safe, userList]);
+
   return (
     <div >
       <Popup trigger={
@@ -39,7 +50,12 @@ export default function Create() {
               <div className='input-box' >
 
                 <div><p className='Search-top'>Safe Name</p>
-
+                  {/* {(safeexist === false) && (<div>Safe already exist</div>)} */}
+                  {safeexist ? (
+                    <label id="alreadyExists">* Safe already exists</label>
+                  ) : (
+                    ""
+                  )}
                   <input className='inside-box'
                     id="safeNameInput"
                     type='text'
@@ -49,8 +65,11 @@ export default function Create() {
                     placeholder='Search'
                     onChange={(event) => { setSafe(event.target.value); }}
                   />
+                  {/* Safe Name &emsp; */}
+                 
+                  {/* {(check === true) && <div>Safe already exists</div>} */}
                 </div><br></br>
-                
+
                 <div><p className='Search-top'>Owner</p>
                   <input className='inside-box'
                     id="ownerInput"
