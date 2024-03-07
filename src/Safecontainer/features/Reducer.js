@@ -3,42 +3,30 @@ export const userSlice = createSlice({
 
   name: "users",
   initialState: {
-    value: [
-
-    ], currentid: "",
+    value: [], currentid: "",
   },
 
 
   reducers: {
-
-    handleSearchJobs: (state, action) => {
-      state.value = [];
-      state.value.push(action.payload)
-    },
 
     setcurrentid: (state, action) => {
       state.currentid = action.payload;
     },
 
     addUser: (state, action) => {
-      
         state.value.push(action.payload);
     },
   
     deleteUser: (state, action) => {
       state.value = state.value.filter((user) => user.id !== action.payload.id);
-      // state.currentid = state.value.length>0 ? state.value[0] : "";
       state.currentid = state.value.length > 0 ? state.value[state.value.length - 1] : "";
-
     },
 
     editSafe: (state, action) => {
       state.value.forEach((users, index) => {
-
         if (users.id === action.payload.id) {
           state.value.splice(index, 1, action.payload);
         }
-
       });
     },
 
@@ -48,7 +36,6 @@ export const userSlice = createSlice({
           if (value === action.payload.id) {
             secrets.secretbox.splice(index, 1);
           }
-
         });
 
       });
@@ -58,11 +45,9 @@ export const userSlice = createSlice({
       state.value.forEach((users) => {
         if (users.id === action.payload.currentid) {
           users.secretbox.push(action.payload.secretbox);
-
         }
       });
     },
-
   },
 });
 
